@@ -18,6 +18,9 @@ for chave, nome in contas.items():
 caminho = r"C:\Loggin"
 arquivo_nome = "Contas.txt"
 caminho_arquivo = os.path.join(caminho, arquivo_nome)
+posicao = pyautogui.position()
+x = 461
+y = 400
 
 def valorant():
     pyautogui.press("win")
@@ -26,7 +29,7 @@ def valorant():
 
 def conta1():
     valorant()
-    time.sleep(20)
+    time.sleep(15)
     with open(caminho_arquivo, 'r', encoding='utf-8') as f:
         linhas = f.readlines()
         linha = linhas[0]
@@ -36,10 +39,14 @@ def conta1():
         pyautogui.press("tab")
         pyautogui.write(senha)
         pyautogui.press("enter")
+        pyautogui.moveTo(x, y, duration= 0.5)
+        time.sleep(15)
+        pyautogui.click()
+        
 
 def conta2():
     valorant()
-    time.sleep(20)
+    time.sleep(15)
     with open(caminho_arquivo, 'r', encoding='utf-8') as f:
         linhas = f.readlines()
         linha = linhas[1]
@@ -49,10 +56,14 @@ def conta2():
         pyautogui.press("tab")
         pyautogui.write(senha)
         pyautogui.press("enter")
+        pyautogui.moveTo(x, y, duration= 0.5)
+        time.sleep(15)
+        pyautogui.click()
+        
 
 def conta3():
     valorant()
-    time.sleep(20)
+    time.sleep(15)
     with open(caminho_arquivo, 'r', encoding='utf-8') as f:
         linhas = f.readlines()
         linha = linhas[2]
@@ -62,10 +73,13 @@ def conta3():
         pyautogui.press("tab")
         pyautogui.write(senha)
         pyautogui.press("enter")
+        pyautogui.moveTo(x, y, duration= 0.5)
+        time.sleep(15)
+        pyautogui.click()
 
-def conta3():
+def conta4():
     valorant()
-    time.sleep(20)
+    time.sleep(15)
     with open(caminho_arquivo, 'r', encoding='utf-8') as f:
         linhas = f.readlines()
         linha = linhas[3]
@@ -75,10 +89,13 @@ def conta3():
         pyautogui.press("tab")
         pyautogui.write(senha)
         pyautogui.press("enter")
+        pyautogui.moveTo(x, y, duration= 0.5)
+        time.sleep(15)
+        pyautogui.click()
 
-def conta4():
+def conta5():
     valorant()
-    time.sleep(20)
+    time.sleep(15)
     with open(caminho_arquivo, 'r', encoding='utf-8') as f:
         linhas = f.readlines()
         linha = linhas[4]
@@ -88,10 +105,13 @@ def conta4():
         pyautogui.press("tab")
         pyautogui.write(senha)
         pyautogui.press("enter")
+        pyautogui.moveTo(x, y, duration= 0.5)
+        time.sleep(15)
+        pyautogui.click()
 
-def conta5():
+def conta6():
     valorant()
-    time.sleep(20)
+    time.sleep(15)
     with open(caminho_arquivo, 'r', encoding='utf-8') as f:
         linhas = f.readlines()
         linha = linhas[5]
@@ -101,19 +121,11 @@ def conta5():
         pyautogui.press("tab")
         pyautogui.write(senha)
         pyautogui.press("enter")
+        pyautogui.moveTo(x, y, duration= 0.5)
+        time.sleep(15)
+        pyautogui.click()
 
-def conta6():
-    valorant()
-    time.sleep(20)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[6]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
+        
 def escolha():
     opcao = input("Digite o número da conta que quer logar: ")
     if opcao == "1":
