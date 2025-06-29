@@ -1,149 +1,106 @@
-import pyautogui
+import sys
 import os
 import time
-
-contas = {
-    "Conta 1": "Ahsay",
-    "Conta 2": "Insomianics",
-    "Conta 3": "The Gui is Gay",
-    "Conta 4": "NicosNic",
-    "Conta 5": "NadaBom155costaGold",
-    "Conta 6": "Xoxotopolis",
-}
-
-print("Eai Chefia, em qual conta quer logar?")
-for chave, nome in contas.items():
-    print(f"{chave}: {nome}")
+import pyautogui
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QMessageBox, QHBoxLayout, QLineEdit
+)
+from PySide6.QtGui import Qt
 
 caminho = r"C:\Loggin"
 arquivo_nome = "Contas.txt"
 caminho_arquivo = os.path.join(caminho, arquivo_nome)
-posicao = pyautogui.position()
 x = 461
 y = 400
 
+# Função para abrir o Valorant
 def valorant():
     pyautogui.press("win")
     pyautogui.write("valorant")
     pyautogui.press("enter")
 
-def conta1():
+# Função para fazer login com base no índice
+def logar_com_conta(numero_conta):
     valorant()
     time.sleep(15)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[0]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
-        pyautogui.moveTo(x, y, duration= 0.5)
-        time.sleep(15)
-        pyautogui.click()
-        
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+            linhas = f.readlines()
+            if numero_conta < len(linhas):
+                linha = linhas[numero_conta]
+                _, dados = linha.strip().split("=")
+                usuario, senha = dados.strip().split(",")
+                pyautogui.write(usuario)
+                pyautogui.press("tab")
+                pyautogui.write(senha)
+                pyautogui.press("enter")
+                pyautogui.moveTo(x, y, duration=0.5)
+                time.sleep(15)
+                pyautogui.click()
+            else:
+                raise IndexError("Número da conta inválido.")
+    except Exception as e:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText("Erro ao logar")
+        msg.setInformativeText(str(e))
+        msg.exec()
 
-def conta2():
-    valorant()
-    time.sleep(15)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[1]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
-        pyautogui.moveTo(x, y, duration= 0.5)
-        time.sleep(15)
-        pyautogui.click()
-        
+class TelaPrincipal(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Login Faster")
+        self.setFixedSize(400, 500)
+        self.setStyleSheet("background-color: #1e1e1e;")
+        self.layout = QVBoxLayout()
 
-def conta3():
-    valorant()
-    time.sleep(15)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[2]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
-        pyautogui.moveTo(x, y, duration= 0.5)
-        time.sleep(15)
-        pyautogui.click()
-
-def conta4():
-    valorant()
-    time.sleep(15)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[3]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
-        pyautogui.moveTo(x, y, duration= 0.5)
-        time.sleep(15)
-        pyautogui.click()
-
-def conta5():
-    valorant()
-    time.sleep(15)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[4]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
-        pyautogui.moveTo(x, y, duration= 0.5)
-        time.sleep(15)
-        pyautogui.click()
-
-def conta6():
-    valorant()
-    time.sleep(15)
-    with open(caminho_arquivo, 'r', encoding='utf-8') as f:
-        linhas = f.readlines()
-        linha = linhas[5]
-        _, dados = linha.split("=")
-        usuario, senha = dados.strip().split(",")
-        pyautogui.write(usuario)
-        pyautogui.press("tab")
-        pyautogui.write(senha)
-        pyautogui.press("enter")
-        pyautogui.moveTo(x, y, duration= 0.5)
-        time.sleep(15)
-        pyautogui.click()
+        self.label = QLabel("Selecione a conta que deseja logar:")
+        self.label.setStyleSheet("""
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 1px;
+            color: #FFFFFF;
+        """)
+        self.label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.label)
 
         
-def escolha():
-    opcao = input("Digite o número da conta que quer logar: ")
-    if opcao == "1":
-        conta1()
-    elif opcao == "2":
-        conta2()
-    elif opcao == "3":
-        conta3()
-    elif opcao == "4":
-        conta4()
-    elif opcao == "5":
-        conta5()
-    elif opcao == "6":
-        conta6()
-    else:
-        print("Por favor, digite um número válido")
-        return escolha()
-    
+        try:
+            with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+                linhas = f.readlines()
+                for idx, linha in enumerate(linhas):
+                    if "=" in linha:
+                        nome_conta = linha.strip().split("=")[0]
+                        botao = QPushButton(nome_conta)
+                        botao.setStyleSheet("""
+                            QPushButton {
+                                background-color: #D83667;
+                                color: white;
+                                padding: 10px 20px;
+                                border: none;
+                                border-radius: 5px;
+                            }
+                            QPushButton:hover {
+                                background-color: #555;
+                            }
+                        """)
+                        botao.clicked.connect(lambda _, i=idx: self.logar(i))
+                        self.layout.addWidget(botao)
+        except FileNotFoundError:
+            aviso = QMessageBox()
+            aviso.setIcon(QMessageBox.Warning)
+            aviso.setText("Arquivo de contas não encontrado.")
+            aviso.exec()
 
-escolha()
+        self.setLayout(self.layout)
 
+    def logar(self, indice):
+        self.close()
+        logar_com_conta(indice)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    janela = TelaPrincipal()
+    janela.show()
+    sys.exit(app.exec())
